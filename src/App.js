@@ -5,10 +5,42 @@ class App extends Component {
     summary: ''
   };
 
+  calculateResult(inputCalculation) {
+    const operations = inputCalculation.split(/[\d]/).filter(Boolean),
+      numbers = inputCalculation.split(/[%x+\-÷]+/);
+
+    // let result = ;
+    for (var i = 1; i < numbers.length; i++) {
+      // result = operate(numbers[i])
+    }
+    console.log(numbers, operations);
+  }
+
   handleClick = event => {
-    this.setState({
-      summary: this.state.summary.concat(event.target.innerText)
-    });
+    const operators = ['+', '-', '%', '*', '/'];
+
+    switch (event.target.innerText) {
+      case '=':
+        this.calculateResult(this.state.summary.slice());
+        break;
+      case '+':
+      case '%':
+      case '/':
+      case '*':
+      case '-':
+      case '.':
+        if (
+          operators.includes(this.state.summary.slice(-1)) &&
+          operators.includes(event.target.innerText)
+        ) {
+          break;
+        }
+      default:
+        this.setState({
+          summary: this.state.summary.concat(event.target.innerText)
+        });
+        break;
+    }
   };
 
   render() {
@@ -19,14 +51,14 @@ class App extends Component {
           <CalcButton value="AC" />
           <CalcButton value="+/_" />
           <CalcButton value="%" />
-          <CalcButton value="÷" />
+          <CalcButton value="/" />
         </div>
 
         <div className="row">
           <CalcButton value="7" />
           <CalcButton value="8" />
           <CalcButton value="9" />
-          <CalcButton value="x" />
+          <CalcButton value="*" />
         </div>
 
         <div className="row">
@@ -54,7 +86,7 @@ class App extends Component {
 }
 
 function CalcButton(props) {
-  return <div className="button">{props.value}</div>;
+  return <button className="button">{props.value}</button>;
 }
 
 export default App;

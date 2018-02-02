@@ -1,14 +1,13 @@
 .calculator {
-  width: 15em;
-  font: 1.5em sans-serif;
+  width: 18em;
 }
 
 .row {
   display: flex;
-  background: #e0e0e0;
 }
 
 .top {
+  font-size: 2em;
   background: #4c4c4c;
   height: 80px;
   border-radius: 0.3em 0.3em 0 0;
@@ -17,21 +16,31 @@
   align-items: center;
 }
 
-.row div:last-of-type {
+.row button:last-of-type {
   border-right: 0.01em solid #8e8e8e;
   background: #f5923e;
   color: white;
 }
 
-.row:last-of-type div:first-child {
-  flex: 6.3;
+.row:last-of-type button:first-child {
+  flex-grow: 2.8;
 }
 
 .button {
+  font-size: 2em;
+  background: #e0e0e0;
   border: 0.01em solid #8e8e8e;
   border-top: none;
   border-right: none;
-  padding: 1em;
-  text-align: center;
-  flex: 2;
+  padding: 0.5em 0;
+  width: 1em;
+  flex-grow: 1;
+  transition: background 20ms;
+  user-select: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.button:active {
+  background: #b2b2b2;
 }
