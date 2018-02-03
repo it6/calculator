@@ -22,8 +22,6 @@ class App extends Component {
             return number1 / number2;
         }
       });
-    console.log(operations, numbers, result);
-
     this.setState({ summary: result.toString() });
   }
 
