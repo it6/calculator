@@ -8,9 +8,9 @@ class App extends Component {
   calculateResult(inputCalculation) {
     let operations = inputCalculation
         .split(/[\d]/)
-        .filter(Boolean)
-        .filter(val => val !== '.'),
-      numbers = inputCalculation.split(/[%*+/\-]+/).map(Number),
+        .map(val => val.replace(/\./, ''))
+        .filter(Boolean),
+      numbers = inputCalculation.split(/[%*+/-]+/).map(Number),
       result = numbers.reduce((number1, number2, index) => {
         switch (operations[index - 1]) {
           case '+':
@@ -23,9 +23,11 @@ class App extends Component {
             return number1 * number2;
           case '/':
             return number1 / number2;
+          default:
+            return 0;
         }
       });
-    this.setState({ summary: result.toString() });
+    this.setState({ summary: (Math.round(result * 100) / 100).toString() });
   }
 
   handleClick = event => {
@@ -59,26 +61,6 @@ class App extends Component {
   };
 
   render() {
-    let buttonsArray = [
-      'C',
-      '%',
-      '/',
-      '7',
-      '8',
-      '9',
-      '*',
-      '4',
-      '5',
-      '6',
-      '-',
-      '1',
-      '2',
-      '3',
-      '+',
-      '0',
-      '.',
-      '='
-    ];
     return (
       <div className="calculator" onClick={this.handleClick}>
         <div className="row top">{this.state.summary}</div>
