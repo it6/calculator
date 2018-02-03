@@ -6,8 +6,11 @@ class App extends Component {
   };
 
   calculateResult(inputCalculation) {
-    let operations = inputCalculation.split(/[\d]/).filter(Boolean),
-      numbers = inputCalculation.split(/[%*+/\-÷]+/).map(Number),
+    let operations = inputCalculation
+        .split(/[\d]/)
+        .filter(Boolean)
+        .filter(val => val !== '.'),
+      numbers = inputCalculation.split(/[%*+/\-]+/).map(Number),
       result = numbers.reduce((number1, number2, index) => {
         switch (operations[index - 1]) {
           case '+':
