@@ -1,5 +1,12 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
 .calculator {
-  width: 18em;
+  width: 20em;
 }
 
 .row {
@@ -22,8 +29,9 @@
   color: white;
 }
 
-.row:last-of-type button:first-child {
-  flex-grow: 2.8;
+.row:last-of-type button:first-child,
+.row:nth-of-type(2) button:first-child {
+  flex-grow: 2.65;
 }
 
 .button {

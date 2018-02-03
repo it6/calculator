@@ -6,14 +6,25 @@ class App extends Component {
   };
 
   calculateResult(inputCalculation) {
-    const operations = inputCalculation.split(/[\d]/).filter(Boolean),
-      numbers = inputCalculation.split(/[%x+\-÷]+/);
+    let operations = inputCalculation.split(/[\d]/).filter(Boolean),
+      numbers = inputCalculation.split(/[%*+/\-÷]+/).map(Number),
+      result = numbers.reduce((number1, number2, index) => {
+        switch (operations[index - 1]) {
+          case '+':
+            return number1 + number2;
+          case '-':
+            return number1 - number2;
+          case '%':
+            return number1 % number2;
+          case '*':
+            return number1 * number2;
+          case '/':
+            return number1 / number2;
+        }
+      });
+    console.log(operations, numbers, result);
 
-    // let result = ;
-    for (var i = 1; i < numbers.length; i++) {
-      // result = operate(numbers[i])
-    }
-    console.log(numbers, operations);
+    this.setState({ summary: result.toString() });
   }
 
   handleClick = event => {
@@ -22,6 +33,9 @@ class App extends Component {
     switch (event.target.innerText) {
       case '=':
         this.calculateResult(this.state.summary.slice());
+        break;
+      case 'C':
+        this.setState({ summary: '' });
         break;
       case '+':
       case '%':
@@ -44,12 +58,31 @@ class App extends Component {
   };
 
   render() {
+    let buttonsArray = [
+      'C',
+      '%',
+      '/',
+      '7',
+      '8',
+      '9',
+      '*',
+      '4',
+      '5',
+      '6',
+      '-',
+      '1',
+      '2',
+      '3',
+      '+',
+      '0',
+      '.',
+      '='
+    ];
     return (
       <div className="calculator" onClick={this.handleClick}>
         <div className="row top">{this.state.summary}</div>
         <div className="row">
-          <CalcButton value="AC" />
-          <CalcButton value="+/_" />
+          <CalcButton value="C" />
           <CalcButton value="%" />
           <CalcButton value="/" />
         </div>
